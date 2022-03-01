@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1639712672 source:c:\users\user\desktop\c++\tubes\main.cpp
+	"wingspeed.h"
+
+1639641548 c:\users\user\desktop\c++\tubes\wingspeed.h
+	<iostream>
+	<string>
+
+1639714303 source:c:\users\user\desktop\c++\tubes\wingspeed.cpp
+	"wingspeed.h"
+
+1639712674 source:c:\users\user\desktop\c++\master tubes\main.cpp
+	"wingspeed.h"
+
+1639800531 c:\users\user\desktop\c++\master tubes\wingspeed.h
+	<iostream>
+	<string>
+
+1639893629 source:c:\users\user\desktop\c++\master tubes\wingspeed.cpp
+	"wingspeed.h"
+
+1639712674 source:d:\telkom u tingkat 2\struktur data\tugas besar\master tubes final\master tubes\main.cpp
+	"wingspeed.h"
+
+1640083331 d:\telkom u tingkat 2\struktur data\tugas besar\master tubes final\master tubes\wingspeed.h
+	<iostream>
+	<string>
+
+1640083094 source:d:\telkom u tingkat 2\struktur data\tugas besar\master tubes final\master tubes\wingspeed.cpp
+	"wingspeed.h"
+
+1641300721 source:f:\telyu\tubes\master tubes final\master tubes\wingspeed.cpp
+	"wingspeed.h"
+
+1640089513 f:\telyu\tubes\master tubes final\master tubes\wingspeed.h
+	<iostream>
+	<string>
+
+1641113244 source:f:\telyu\tubes\master tubes final\master tubes\main.cpp
+	"wingspeed.h"
+

@@ -1,0 +1,280 @@
+#include "wingspeed.h"
+
+void createListHari(mllHari &L) {
+    first(L) = nil;
+    last(L) = nil;
+}
+
+void createListBarang(mllBarang &L) {
+    first(L) = nil;
+    last(L) = nil;
+}
+
+float hitungBiaya(float berat) {
+    int beratA = berat;
+
+    if (berat <= 1) {
+        return 8000;
+    } else {
+        return (8000 * beratA);
+    }
+}
+
+//////////////////////////////////////////////
+
+hari newDataHari(string kodeH, string date, string tipeP) {
+    hari data;
+
+    data.kodeH = kodeH;
+    data.date = date;
+    data.tipeP = tipeP;
+
+    return data;
+}
+
+adrHari createElemenHari(hari dataBaru, adrHari P) {
+    P = new elmHari;
+
+    info(P).kodeH = dataBaru.kodeH;
+    info(P).date = dataBaru.date;
+    info(P).tipeP = dataBaru.tipeP;
+    next(P) = nil;
+    prev(P) = nil;
+    nextBarang(P) = nil;
+
+    return P;
+}
+
+void showDataHari (mllHari DataPengiriman){
+    adrHari P;
+
+    P = first(DataPengiriman);
+
+    while(P != nil) {
+        cout << "Kode Hari       : "<< info(P).kodeH << endl;
+        cout << "Tanggal         : "<< info(P).date << endl;
+        cout << "Tipe Pengiriman : " << info(P).tipeP << endl;
+        P = next(P);
+        cout << endl;
+    }
+}
+
+void insertLastHari(mllHari &L, adrHari P){
+    if (first(L) == nil) {
+        first(L) = P;
+        last(L) = P;
+    } else {
+        next(last(L)) = P;
+        prev(P) = last(L);
+        last(L) = P;
+    }
+}
+
+adrHari deleteLastHari(mllHari &L) {
+    adrHari P;
+
+    P = last(L);
+
+    if (prev(last(L)) != nil) {
+        last(L) = prev(last(L));
+        prev(P) = nil;
+        next(last(L)) = nil;
+    } else {
+        first(L) = nil;
+        last(L) = nil;
+    }
+}
+
+adrHari findParent (mllHari L, string kode) {
+    adrHari P = first(L);
+    adrHari Q;
+
+    while (P != nil) {
+        if (info(P).kodeH == kode) {
+            Q = P;
+        }
+        P = next(P);
+    }
+    return Q;
+}
+
+void deleteRelasi(mllHari &L) {
+
+}
+
+void createRelasi(mllHari &L, adrHari P) {
+
+}
+
+//////////////////////////////////////////////
+
+barang newDataBarang(string resi, string tanggal, string jenis, float berat, string tipeP, string penerima, string alamat, string fragility, string pengirim) {
+    barang data;
+
+    data.resi = resi;
+    data.tanggal = tanggal;
+    data.jenis = jenis;
+    data.berat = berat;
+    data.tipeP = tipeP;
+    data.penerima = penerima;
+    data.alamat = alamat;
+    data.fragility = fragility;
+    data.pengirim = pengirim;
+
+    return data;
+}
+
+adrBarang createElemenBarang(barang dataBaru, adrBarang P) {
+    P = new elmBarang;
+
+    info(P).resi = dataBaru.resi;
+    info(P).tanggal = dataBaru.tanggal;
+    info(P).jenis = dataBaru.jenis;
+    info(P).berat = dataBaru.berat;
+    info(P).tipeP = dataBaru.tipeP;
+    info(P).penerima = dataBaru.penerima;
+    info(P).alamat = dataBaru.alamat;
+    info(P).fragility = dataBaru.fragility;
+    info(P).pengirim = dataBaru.pengirim;
+
+    next(P) = nil;
+    prev(P) = nil;
+
+    return P;
+}
+
+adrBarang findChild(mllBarang L, string kode) {
+    adrBarang P = first(L);
+    adrBarang Q;
+
+    while (P != nil) {
+        if (info(P).resi == kode) {
+            Q = P;
+        }
+        P = next(P);
+    }
+    return Q;
+}
+
+void deleteFirstChild(mllBarang &L) {
+    adrBarang P;
+
+    P = first(L);
+    if (next(first(L)) == nil) {
+        first(L) = nil;
+        last(L) = nil;
+    } else {
+        first(L) = next(first(L));
+        prev(first(L)) = nil;
+        next(P) = nil;
+    }
+}
+
+void deleteLastChild(mllBarang &L) {
+    adrBarang P;
+
+    P = last(L);
+
+    if (prev(last(L)) != nil) {
+        last(L) = prev(last(L));
+        prev(P) = nil;
+        next(last(L)) = nil;
+    } else {
+        first(L) = nil;
+        last(L) = nil;
+    }
+}
+
+void deleteAfterChild(adrBarang prec) {
+    adrBarang P;
+
+    P = next(prec);
+    next(prec) = next(P);
+    prev(next(P)) = prec;
+    prev(P) = nil;
+    next(P) = nil;
+
+}
+
+void deleteChild(mllHari &L, adrBarang prec) {
+    adrBarang P;
+
+    P = first(L);
+
+    cout << info(P).resi << endl;
+}
+
+void insertLastBarang(mllHari &L, adrBarang J){
+    adrBarang P;
+
+    adrHari S;
+
+    S = findDataEntry(L, info(J).tanggal, info(J).tipeP);
+
+    P = nextBarang(S);
+    if (nextBarang(S) == nil){
+        nextBarang(S) = J;
+    }else{
+        while (next(P) != nil){
+            P = next(P);
+        }
+        next(P) = J;
+    }
+}
+
+//////////////////////////////////////////////
+
+adrHari findDataEntry(mllHari L ,string tanggal, string tipeP) {
+    adrHari P = first(L);
+    adrHari data;
+
+    while (P != nil) {
+        if (tanggal == info(P).date && tipeP == info(P).tipeP) {
+            data = P;
+        }
+        P = next(P);
+    }
+
+    return data;
+}
+
+void ShowAllData(mllHari L){
+    adrBarang P;
+    adrHari Q;
+    int i = 1;
+    float biaya;
+
+    Q = first(L);
+    while (Q != nil){
+        cout << "Kode Hari       : " << info(Q).kodeH << endl;
+        cout << "Tanggal         : " << info(Q).date << endl;
+        cout << "Tipe Pengiriman : " << info(Q).tipeP << endl;
+
+        P = nextBarang(Q);
+        i = 1;
+        while (P != nil){
+            cout << "===========================" << endl;
+            cout << "Data ke-" << i << endl;
+
+            cout << "Resi             : " << info(P).resi << endl;
+            cout << "Tanggal          : " << info(P).tanggal << endl;
+            cout << "Jenis Barang     : " << info(P).jenis << endl;
+            cout << "Berat Barang     : " << info(P).berat << " Kg" << endl;
+            cout << "Tipe Pengiriman  : " << info(P).tipeP << endl;
+            cout << "Nama Penerima    : " << info(P).penerima << endl;
+            cout << "Alamat Penerima  : " << info(P).alamat << endl;
+            cout << "Fragility        : " << info(P).fragility << endl;
+            cout << "Nama Pengirim    : " << info(P).pengirim << endl;
+
+            biaya = hitungBiaya(info(P).berat);
+            cout << "Biaya Pengiriman : " << "Rp. " << biaya << endl;
+
+            P = next(P);
+            i++;
+        }
+        cout << endl << endl;
+        Q = next(Q);
+    }
+
+}
+
